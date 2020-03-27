@@ -20,10 +20,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'Roboto',
         brightness: Brightness.light,
-        primaryColor: Colors.blue,
-        accentColor: Colors.blueAccent,
-        indicatorColor: Colors.blueGrey
+        primaryColor: Colors.cyan[500],
+        buttonColor: Colors.cyan[500],
+        accentColor: Colors.cyanAccent[400],
+        indicatorColor: Colors.cyanAccent[200]
       ),
       supportedLocales: [Locale('es', 'MX')],
       localizationsDelegates: [
