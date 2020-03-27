@@ -1,0 +1,18 @@
+{
+  "wellcome_button_sign_in": "Iniciar sesión",
+  "wellcome_button_sign_up": "Regístrate",
+  "sign_in_placeholder_email": "Email",
+  "sign_in_label_error_email": "El formato no es correcto.",
+  "sign_in_placeholder_password": "Password",
+  "sign_in_label_error_password": "El formato no es correcto.",
+  "sign_in_button_sign_in": "Iniciar sesión",
+  "sign_in_snackbar_loading": "Inciando sesión...",
+  "sign_in_snackbar_failure": "Error al iniciar sesión.",
+  "sign_up_placeholder_email": "Email",
+  "sign_up_label_error_email": "El formato no es correcto.",
+  "sign_up_placeholder_password": "Password",
+  "sign_up_label_error_password": "El formato no es correcto.",
+  "sign_up_button_sign_up": "Regístrate",
+  "sign_up_snackbar_loading": "Regístrando...",
+  "sign_up_snackbar_failure": "Error al regístrarse."
+}

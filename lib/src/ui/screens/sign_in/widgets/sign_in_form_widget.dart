@@ -1,5 +1,6 @@
 import 'package:covidapp/src/blocs/authentication/authentication_base.dart';
 import 'package:covidapp/src/blocs/sign_in/sign_in_base.dart';
+import 'package:covidapp/src/core/custom_localization.dart';
 import 'package:covidapp/src/ui/widgets/app_snack_bar/app_sback_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +37,15 @@ class SignInFormWidget extends StatelessWidget {
         AppSnackBarHandler appSnackBarHandler = AppSnackBarHandler(context);
 
         if(state.isFailure) {
-          appSnackBarHandler.showSnackBar(AppSnackBarWidget.failure(text: 'Failure Sign In'));
+          appSnackBarHandler.showSnackBar(AppSnackBarWidget.failure(
+              text: CustomLocalization.of(context).translate('sign_in_snackbar_failure'),
+          ));
         }
 
         if(state.isSubmitting) {
-          appSnackBarHandler.showSnackBar(AppSnackBarWidget.load(text: 'Signining In...'));
+          appSnackBarHandler.showSnackBar(AppSnackBarWidget.load(
+              text: CustomLocalization.of(context).translate('sign_in_snackbar_loading'),
+          ));
         }
       },
       child: BlocBuilder<SignInBloc, SignInState>(
@@ -52,13 +57,13 @@ class SignInFormWidget extends StatelessWidget {
                   controller: _emailController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.email),
-                    labelText: 'Email',
+                    labelText: CustomLocalization.of(context).translate('sign_in_placeholder_email'),
                   ),
                   autovalidate: true,
                   autocorrect: false,
                   validator: (_) {
                     return !state.isEmailValid
-                        ? 'Email is invalid.'
+                        ? CustomLocalization.of(context).translate('sign_in_label_error_email')
                         : null;
                   },
                 ),
@@ -66,19 +71,19 @@ class SignInFormWidget extends StatelessWidget {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.lock),
-                    labelText: 'Password',
+                    labelText: CustomLocalization.of(context).translate('sign_in_placeholder_password'),
                   ),
                   obscureText: true,
                   autovalidate: true,
                   autocorrect: false,
                   validator: (_) {
                     return !state.isPasswordValid
-                        ? 'Password is invalid.'
+                        ? CustomLocalization.of(context).translate('sign_in_label_error_password')
                         : null;
                   },
                 ),
                 RaisedButton(
-                  child: Text('Sign In'),
+                  child: Text(CustomLocalization.of(context).translate('sign_in_button_sign_in')),
                   onPressed: () {
                     if(_isSignInButtonEnabled(state)) {
                       signInBloc.add(SignInPressed(
