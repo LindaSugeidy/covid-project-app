@@ -55,6 +55,7 @@ class SignInFormWidget extends StatelessWidget {
               children: <Widget>[
                 TextFormField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     icon: Icon(Icons.email),
                     labelText: CustomLocalization.of(context).translate('sign_in_placeholder_email'),
@@ -69,6 +70,7 @@ class SignInFormWidget extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: _passwordController,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     icon: Icon(Icons.lock),
                     labelText: CustomLocalization.of(context).translate('sign_in_placeholder_password'),
@@ -83,16 +85,14 @@ class SignInFormWidget extends StatelessWidget {
                   },
                 ),
                 RaisedButton(
-                  child: Text(CustomLocalization.of(context).translate('sign_in_button_sign_in')),
-                  onPressed: () {
-                    if(_isSignInButtonEnabled(state)) {
+                  child: Text(CustomLocalization.of(context).translate(
+                      'sign_in_button_sign_in')),
+                  onPressed: _isSignInButtonEnabled(state) ? () =>
                       signInBloc.add(SignInPressed(
                         email: _emailController.text,
                         password: _passwordController.text,
-                      ));
-                    }                    
-                  },
-                )
+                      )) : null,
+                ),
               ],
             ),
           );

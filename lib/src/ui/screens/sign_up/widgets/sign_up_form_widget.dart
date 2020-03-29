@@ -55,6 +55,7 @@ class SignUpFormWidget extends StatelessWidget {
               children: <Widget>[
                 TextFormField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     icon: Icon(Icons.email),
                     labelText: CustomLocalization.of(context).translate('sign_up_placeholder_email'),
@@ -69,6 +70,7 @@ class SignUpFormWidget extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: _passwordController,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     icon: Icon(Icons.lock),
                     labelText: CustomLocalization.of(context).translate('sign_up_placeholder_password'),
@@ -83,15 +85,10 @@ class SignUpFormWidget extends StatelessWidget {
                   },
                 ),
                 RaisedButton(
-                  child: Text(CustomLocalization.of(context).translate('sign_up_button_sign_up')),
-                  onPressed: () {
-                    if(_isSignInButtonEnabled(state)) {
-                      signUpBloc.add(SignUpSubmitted(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                      ));
-                    }                    
-                  },
+                  child: Text(CustomLocalization.of(context).translate(
+                      'sign_up_button_sign_up')),
+                  onPressed: _isSignInButtonEnabled(state) ? () =>
+                      _onFormSubmitted(signUpBloc) : null,
                 )
               ],
             ),
@@ -106,5 +103,12 @@ class SignUpFormWidget extends StatelessWidget {
 
   bool _isSignInButtonEnabled(SignUpState state) {
     return state.isFormValid && _isPopulated && !state.isSubmitting;
+  }
+
+  void _onFormSubmitted(SignUpBloc signUpBloc) {
+    signUpBloc.add(SignUpSubmitted(
+      email: _emailController.text,
+      password: _passwordController.text,
+    ));
   }
 }

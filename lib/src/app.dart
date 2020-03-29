@@ -1,6 +1,10 @@
 import 'package:covidapp/src/blocs/authentication/authentication_base.dart';
 import 'package:covidapp/src/core/custom_localization.dart';
+import 'package:covidapp/src/core/db_keys.dart';
 import 'package:covidapp/src/resources/authentication/authentication_repository.dart';
+import 'package:covidapp/src/resources/db/db_repository.dart';
+import 'package:covidapp/src/resources/db/hive_repository_impl.dart';
+import 'package:covidapp/src/ui/screens/country_selector/country_selector_screen.dart';
 import 'package:covidapp/src/ui/screens/home/home_screen.dart';
 import 'package:covidapp/src/ui/screens/splash/splash_screen.dart';
 import 'package:covidapp/src/ui/screens/wellcome/wellcome_screen.dart';
@@ -12,22 +16,21 @@ class App extends StatelessWidget {
   final AuthenticationRepository _authenticationRepository;
 
   App({Key key, @required AuthenticationRepository authenticationRepository})
-    : assert(authenticationRepository != null),
-      _authenticationRepository = authenticationRepository,
-      super(key: key);
+      : assert(authenticationRepository != null),
+        _authenticationRepository = authenticationRepository,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'Roboto',
-        brightness: Brightness.light,
-        primaryColor: Colors.cyan[500],
-        buttonColor: Colors.cyan[500],
-        accentColor: Colors.cyanAccent[400],
-        indicatorColor: Colors.cyanAccent[200]
-      ),
-      supportedLocales: [Locale('es', 'MX')],
+          fontFamily: 'Roboto',
+          brightness: Brightness.light,
+          primaryColor: Colors.cyan[500],
+          buttonColor: Colors.cyan[500],
+          accentColor: Colors.cyanAccent[400],
+          indicatorColor: Colors.cyanAccent[200]),
+      supportedLocales: [Locale('es', 'MX'), Locale('en', 'US')],
       localizationsDelegates: [
         CustomLocalization.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -44,21 +47,42 @@ class App extends StatelessWidget {
       },
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
-          if(state is AuthenticationInitial) {
+          if (state is AuthenticationInitial) {
             return SplashScreen();
           }
 
-          if(state is AuthenticationFailure) {
-            return WellcomeScreen(authenticationRepository: _authenticationRepository);
+          if (state is AuthenticationFailure) {
+            return WellcomeScreen(
+                authenticationRepository: _authenticationRepository);
           }
 
-          if(state is AuthenticationSuccess) {
-            return HomeScreen(authenticationRepository: _authenticationRepository,user: state.user);
+          if (state is AuthenticationSuccess) {
+            DbRepository dbRepository =
+                HiveRepositoryImpl(tableName: DbKeys.covidDb.toString());
+            if (_isFirstTime(dbRepository)) {
+              return CountrySelectorScreen(
+                dbRepository: dbRepository,
+              );
+            } else {
+              return HomeScreen(
+                authenticationRepository: _authenticationRepository,
+                user: state.user,
+                dbRepository: dbRepository,
+              );
+            }
           }
 
           return SplashScreen();
         },
       ),
     );
+  }
+
+  bool _isFirstTime(DbRepository dbRepository) {
+    print(DbKeys.covidDb.toString());
+    if (dbRepository.get(DbKeys.firstTime.toString()) == null) {
+      return true;
+    }
+    return false;
   }
 }
