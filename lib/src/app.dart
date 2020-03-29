@@ -59,7 +59,7 @@ class App extends StatelessWidget {
           if (state is AuthenticationSuccess) {
             DbRepository dbRepository =
                 HiveRepositoryImpl(tableName: DbKeys.covidDb.toString());
-            if (_isFirstTime(dbRepository)) {
+            if (!_isFirstTime(dbRepository)) {
               return CountrySelectorScreen(
                 dbRepository: dbRepository,
               );
@@ -71,7 +71,6 @@ class App extends StatelessWidget {
               );
             }
           }
-
           return SplashScreen();
         },
       ),

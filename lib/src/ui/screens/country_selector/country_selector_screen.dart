@@ -7,6 +7,8 @@ import 'package:meta/meta.dart';
 
 class CountrySelectorScreen extends StatelessWidget {
   final DbRepository _dbRepository;
+  final String initialCountry = "México";
+  final String initialCountryCode = "MX";
 
   CountrySelectorScreen({Key key, @required DbRepository dbRepository})
       : assert(dbRepository != null),
@@ -15,8 +17,8 @@ class CountrySelectorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _country;
-    String _countryCode;
+    String _country = initialCountry;
+    String _countryCode = initialCountryCode;
     return Scaffold(
       body: Center(
         child: Column(
@@ -29,24 +31,27 @@ class CountrySelectorScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CountryCodePicker(
-                onInit: (b) {
-                  _country = b.name;
-                  _countryCode = b.code;
-                },
-                onChanged: (b) {
-                  _country = b.name;
-                  _countryCode = b.code;
-                },
-                initialSelection: "MX",
-                showCountryOnly: true,
-                showFlagMain: true,
-                flagWidth: (MediaQuery.of(context).size.aspectRatio * 200)
-                    .truncateToDouble(),
-                showOnlyCountryWhenClosed: true,
-                favorite: ['MX', 'ES'],
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(18.0),
+                color: Colors.grey[100],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 25.0, 8.0),
+                child: CountryCodePicker(
+                  onChanged: (b) {
+                    _country = b.name;
+                    _countryCode = b.code;
+                  },
+                  initialSelection: initialCountryCode,
+                  showCountryOnly: true,
+                  showFlagMain: true,
+                  flagWidth: (MediaQuery.of(context).size.aspectRatio * 200)
+                      .truncateToDouble(),
+                  showOnlyCountryWhenClosed: true,
+                  favorite: [initialCountryCode, 'ES'],
+                ),
               ),
             ),
             RaisedButton.icon(

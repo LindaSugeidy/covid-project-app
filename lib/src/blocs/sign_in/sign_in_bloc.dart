@@ -20,7 +20,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     Stream<SignInEvent> events,
     Stream<SignInState> Function(SignInEvent event) next,
   ) {
-    final observableStream = events as Observable<SignInEvent>;
+    final observableStream = events;
     final nonDebounceStream = observableStream.where((event) {
       return (event is! SignInEmailChanged && event is! SignInPasswordChanged);
     });

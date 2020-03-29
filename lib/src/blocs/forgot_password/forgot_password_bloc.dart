@@ -20,7 +20,7 @@ class ForgotPasswordBloc
   Stream<ForgotPasswordState> transformEvents(
       Stream<ForgotPasswordEvent> events,
       Stream<ForgotPasswordState> Function(ForgotPasswordEvent event) next) {
-    final observableStream = events as Observable<ForgotPasswordEvent>;
+    final observableStream = events;
     final nonDebounceStream = observableStream.where((event) {
       return (event is! ForgotPasswordEmailChanged);
     });
