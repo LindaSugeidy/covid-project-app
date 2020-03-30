@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'Survey.g.dart';
+
 @JsonSerializable()
 class Survey extends Equatable {
 
@@ -30,6 +32,18 @@ class Survey extends Equatable {
   ];
 
 
+  factory Survey.fromJson(Map<String, dynamic> json) =>
+      _$SurveyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SurveyToJson(this);
+
   @override
   bool get stringify => true;
+
+  @override
+  String toString() {
+    return 'Survey{id: $id, name: $name, date: $date, questions: $questions}';
+  }
+
+
 }

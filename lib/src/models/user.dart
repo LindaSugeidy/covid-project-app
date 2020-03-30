@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+
 class User extends Equatable {
   final String id;
   final String email;
@@ -26,4 +27,5 @@ class User extends Equatable {
   @override
   String toString() => 
     '$runtimeType { id: $id, email: $email, name: $name, country: $country, state: $state, gender: $gender, age: $age }';
+
 }

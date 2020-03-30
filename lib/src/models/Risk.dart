@@ -2,8 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'Risk.g.dart';
+
 @JsonSerializable()
-class Risk  extends Equatable {
+class Risk extends Equatable {
 
   final String id;
   final String name;
@@ -31,6 +33,19 @@ List<Object> get props => [
 ];
 
 
-@override
-bool get stringify => true;
+  factory Risk.fromJson(Map<String, dynamic> json) =>
+      _$RiskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RiskToJson(this);
+
+
+  @override
+  bool get stringify => true;
+
+  @override
+  String toString() {
+    return 'Risk{id: $id, name: $name, minRange: $minRange, maxRange: $maxRange, message: $message}';
+  }
+
+
 }

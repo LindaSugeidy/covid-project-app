@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'Country.g.dart';
+
 @JsonSerializable()
 class Country extends Equatable {
 
@@ -47,7 +49,19 @@ List<Object> get props => [
   profilesLastConfirmed
 ];
 
+  factory Country.fromJson(Map<String, dynamic> json) =>
+      _$CountryFromJson(json);
 
-@override
-bool get stringify => true;
+  Map<String, dynamic> toJson() => _$CountryToJson(this);
+
+
+  @override
+  bool get stringify => true;
+
+  @override
+  String toString() {
+    return 'Country{id: $id, name: $name, confirmed: $confirmed, recovered: $recovered, risk: $risk, riskFree: $riskFree, riskHigh: $riskHigh, riskLow: $riskLow, total: $total, profilesLastConfirmed: $profilesLastConfirmed}';
+  }
+
+
 }

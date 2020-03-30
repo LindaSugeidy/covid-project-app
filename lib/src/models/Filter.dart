@@ -2,8 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'Filter.g.dart';
+
 @JsonSerializable()
-class Filter   extends Equatable {
+class Filter extends Equatable {
 
   final String name;
   final String comparator;
@@ -31,6 +33,20 @@ List<Object> get props => [
 ];
 
 
-@override
-bool get stringify => true;
+
+  factory Filter.fromJson(Map<String, dynamic> json) =>
+      _$FilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FilterToJson(this);
+
+
+  @override
+  bool get stringify => true;
+
+  @override
+  String toString() {
+    return 'Filter{name: $name, comparator: $comparator, value: $value, values: $values, limit: $limit}';
+  }
+
+
 }
