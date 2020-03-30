@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:covidapp/src/core/db_keys.dart';
+import 'package:covidapp/src/resources/authentication/authentication_repository.dart';
 import 'package:covidapp/src/resources/db/db_repository.dart';
 import 'package:covidapp/src/ui/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,18 @@ import 'package:meta/meta.dart';
 
 class CountrySelectorScreen extends StatelessWidget {
   final DbRepository _dbRepository;
+  final AuthenticationRepository _authenticationRepository;
   final String initialCountry = "México";
   final String initialCountryCode = "MX";
 
-  CountrySelectorScreen({Key key, @required DbRepository dbRepository})
-      : assert(dbRepository != null),
+  CountrySelectorScreen({
+    Key key,
+    @required DbRepository dbRepository,
+    AuthenticationRepository authenticationRepository,
+  })  : assert(dbRepository != null),
+        assert(authenticationRepository != null),
         _dbRepository = dbRepository,
+        _authenticationRepository = authenticationRepository,
         super(key: key);
 
   @override
@@ -20,22 +27,27 @@ class CountrySelectorScreen extends StatelessWidget {
     String _country = initialCountry;
     String _countryCode = initialCountryCode;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Center(
               child: Text(
-                "Selecciona tu país de nacimiento",
-                style: TextStyle(fontSize: 30.0),
+                "Selecciona tu país de residencia",
+                style: TextStyle(
+                  fontSize: 30.0,
+                  height: 2,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
+                border: Border.all(color: Color(0xffC3BFC7)),
                 borderRadius: BorderRadius.circular(18.0),
-                color: Colors.grey[100],
+                color: Colors.white,
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 8.0, 25.0, 8.0),
@@ -82,6 +94,7 @@ class CountrySelectorScreen extends StatelessWidget {
       MaterialPageRoute(builder: (context) {
         return ProfileScreen(
           dbRepository: _dbRepository,
+          authenticationRepository: _authenticationRepository,
         );
       }),
     );
