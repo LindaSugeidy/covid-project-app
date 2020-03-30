@@ -1,1 +1,1 @@
-enum DbKeys { covidDb, firstTime, countryUser, countryCodeUser, currentCountry }
+enum DbKeys { covidDb, firstTime, emailUser, countryUser, countryCodeUser, currentCountry }
