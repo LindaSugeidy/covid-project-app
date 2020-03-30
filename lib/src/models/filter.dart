@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'Filter.g.dart';
+part 'filter.g.dart';
 
 @JsonSerializable()
 class Filter extends Equatable {
@@ -14,23 +14,23 @@ class Filter extends Equatable {
   final int limit;
 
   Filter  (
-  {@required
-  this.name,
-    this.comparator,
-    this.value,
-    this.values,
-    this.limit
-}
-);
+      {@required
+      this.name,
+        this.comparator,
+        this.value,
+        this.values,
+        this.limit
+      }
+      );
 
-@override
-List<Object> get props => [
-  name,
-  comparator,
-  value,
-  values,
-  limit
-];
+  @override
+  List<Object> get props => [
+    name,
+    comparator,
+    value,
+    values,
+    limit
+  ];
 
 
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Risk.dart';
+part of 'risk.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

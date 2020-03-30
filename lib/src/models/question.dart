@@ -1,9 +1,9 @@
-import 'package:covidapp/src/models/Answer.dart';
+import 'package:covidapp/src/models/answer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'Question.g.dart';
+part 'question.g.dart';
 
 @JsonSerializable()
 class Question extends Equatable {
@@ -17,15 +17,15 @@ class Question extends Equatable {
   final List<Answer> answers;
 
   Question(
-  {@required
-  this.id,
-    this.order,
-    this.question,
-    this.type,
-    this.subQuestion,
-    this.answer,
-    this.answers
-  }
+      {@required
+      this.id,
+        this.order,
+        this.question,
+        this.type,
+        this.subQuestion,
+        this.answer,
+        this.answers
+      }
       );
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 
-part 'Answer.g.dart';
+part 'answer.g.dart';
 
 @JsonSerializable()
 class Answer extends Equatable {
@@ -15,7 +15,7 @@ class Answer extends Equatable {
 
   Answer(
       {@required
-        this.id,
+      this.id,
         this.answer,
         this.order,
         this.idQuestion}
@@ -39,10 +39,6 @@ class Answer extends Equatable {
   @override
   bool get stringify => true;
 
-  @override
-  String toString() {
-    return 'Answer{id: $id, answer: $answer, order: $order, idQuestion: $idQuestion}';
-  }
 
 
 }

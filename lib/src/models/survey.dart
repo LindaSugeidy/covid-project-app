@@ -1,9 +1,9 @@
-import 'package:covidapp/src/models/Question.dart';
+import 'package:covidapp/src/models/question.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'Survey.g.dart';
+part 'survey.g.dart';
 
 @JsonSerializable()
 class Survey extends Equatable {
@@ -17,9 +17,9 @@ class Survey extends Equatable {
   Survey(
       {@required
       this.id,
-      this.name,
-      this.date,
-      this.questions
+        this.name,
+        this.date,
+        this.questions
       }
       );
 
