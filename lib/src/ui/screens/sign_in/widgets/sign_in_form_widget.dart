@@ -1,6 +1,7 @@
 import 'package:covidapp/src/blocs/authentication/authentication_base.dart';
 import 'package:covidapp/src/blocs/sign_in/sign_in_base.dart';
 import 'package:covidapp/src/core/custom_localization.dart';
+import 'package:covidapp/src/ui/widgets/app_raised_rounded_button/app_raised_rounded_button_widget.dart';
 import 'package:covidapp/src/ui/widgets/app_snack_bar/app_sback_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,9 +85,8 @@ class SignInFormWidget extends StatelessWidget {
                         : null;
                   },
                 ),
-                RaisedButton(
-                  child: Text(CustomLocalization.of(context).translate(
-                      'sign_in_button_sign_in')),
+                AppRaisedRoundedButtonWidget(
+                  text: CustomLocalization.of(context).translate('sign_in_button_sign_in'),
                   onPressed: _isSignInButtonEnabled(state) ? () =>
                       signInBloc.add(SignInPressed(
                         email: _emailController.text,

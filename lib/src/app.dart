@@ -8,6 +8,7 @@ import 'package:covidapp/src/ui/screens/country_selector/country_selector_screen
 import 'package:covidapp/src/ui/screens/home/home_screen.dart';
 import 'package:covidapp/src/ui/screens/splash/splash_screen.dart';
 import 'package:covidapp/src/ui/screens/wellcome/wellcome_screen.dart';
+import 'package:covidapp/src/ui/widgets/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,12 +25,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          fontFamily: 'Roboto',
+          fontFamily: 'Futura',
           brightness: Brightness.light,
-          primaryColor: Colors.cyan[500],
-          buttonColor: Colors.cyan[500],
-          accentColor: Colors.cyanAccent[400],
-          indicatorColor: Colors.cyanAccent[200]),
+          primaryColor: HexColor('6244b3'),
+          backgroundColor: HexColor('f6eeff'),
+          buttonColor: HexColor('6244b3'),
+      ),
       supportedLocales: [Locale('es', 'MX'), Locale('en', 'US')],
       localizationsDelegates: [
         CustomLocalization.delegate,
